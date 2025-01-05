@@ -36,8 +36,17 @@ class DealsController extends Controller
 
         // Handle file upload if image is provided
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('special_deals', 'public');
-            $imagePath = Storage::url($imagePath);
+            // Get the uploaded file
+            $image = $request->file('image');
+            // Get the original file extension
+            $fileExtension = $image->getClientOriginalExtension();
+            // Generate a unique, code-based file name
+            $fileName = uniqid('img_') . '_' . str_pad(mt_rand(1, 9999), 4, '0', STR_PAD_LEFT) . '.' . $fileExtension;
+            $path = public_path('storage/special_deals'); // Correct path for saving
+            $image->move($path, $fileName);
+
+            // Generate the full URL to the image
+            $imagePath = url('storage/special_deals/' . $fileName);
         }
 
         if ($id) {
