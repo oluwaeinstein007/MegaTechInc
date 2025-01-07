@@ -32,7 +32,6 @@ return new class extends Migration
             $table->foreignId('brand_id')->nullable()->constrained()->onDelete('set null');
             $table->string('name');
             $table->text('description');
-            $table->string('material');
             $table->decimal('price', 10, 2);
 
             // $table->boolean('is_deal_of_month')->default(false); // For "Deal of the Month"

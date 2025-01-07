@@ -143,7 +143,7 @@ class ProductController extends Controller
             'description' => 'required',
             'category_id' => 'required|exists:categories,id',
             'brand_id' => 'nullable|exists:brands,id',
-            'material' => 'required|string',
+            // 'material' => 'required|string',
             'price' => 'required|numeric',
             'images' => 'array',
             'images.*.file' => 'required|image|max:2048',
@@ -183,7 +183,7 @@ class ProductController extends Controller
             // Store the URL in the database
             $product->images()->create([
                 'image_path' => $imageUrl,
-                'color_id' => $image['color_id']
+                'color_id' => $image['color_id'] ?? null,
             ]);
 
         }
