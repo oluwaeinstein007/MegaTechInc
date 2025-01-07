@@ -415,7 +415,9 @@ class ProductController extends Controller
 
         // // Paginate the query results
         // $products = $query->paginate($perPage, ['*'], 'page', $page);
-        $products = $query->get();
+        //rearrange from latest to oldest
+        $products = $query->latest()->get();
+        // $products = $query->get();
 
         // If currency conversion is needed, apply the conversion
         if ($request->has('returnCurrency') && $request->returnCurrency) {
